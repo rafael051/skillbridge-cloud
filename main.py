@@ -9,7 +9,8 @@ from fastapi import (
     FastAPI,
     HTTPException,
 )
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, RedirectResponse
+
 
 from pydantic import BaseModel, Field
 
@@ -37,6 +38,11 @@ app = FastAPI(
     version="2.2.0",
     description="API em nuvem usando OpenAI para IA Generativa."
 )
+
+@app.get("/", include_in_schema=False)
+def redirect_root_to_docs():
+    return RedirectResponse(url="/docs")
+
 
 # ================= Models =================
 
